@@ -13,8 +13,6 @@ import static io.restassured.RestAssured.given;
 
 public class UserGenerator {
 
-    private UserGenerator() {} // запрет создания экземпляров
-
     private static final RequestSpecification requestSpec = new RequestSpecBuilder()
             .setBaseUri("http://localhost")
             .setPort(9999)
@@ -22,8 +20,10 @@ public class UserGenerator {
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
-
     private static final Faker faker = new Faker(new Locale("ru"));
+
+    private UserGenerator() {
+    } // запрет создания экземпляров
 
     // Основной метод генерации пользователя
     public static RegistrationDto generateUser(String status) {
@@ -44,11 +44,11 @@ public class UserGenerator {
         return user;
     }
 
-    public static RegistrationDto generateActiveUser() {
+    public static RegistrationDto activeUser() {
         return generateUser("active");
     }
 
-    public static RegistrationDto generateBlockedUser() {
+    public static RegistrationDto blockedUser() {
         return generateUser("blocked");
     }
 }
