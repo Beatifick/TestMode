@@ -19,8 +19,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Start SUT
-        run: java -jar artifacts/app-ibank.jar -P:profile=test 
-      - run: sleep 10
+        run: java -jar artifacts/app-ibank.jar -P:profile=test > app.log 2>&1 &
 
       - name: Build with Gradle
         run: ./gradlew test -Dselenide.headless=true
